@@ -1,6 +1,13 @@
 import "./styles.css";
-import { safe, isNumber, liftA2 } from "crocks";
-import compose from "crocks/helpers/compose";
+import {
+  safe,
+  isNumber,
+  liftA2,
+  compose,
+  coalesce,
+  constant,
+  Identity
+} from "crocks";
 
 document.getElementById("app").innerHTML = `
 <h1>Result</h1>
@@ -17,7 +24,9 @@ const safeAdd = liftA2(add);
 const displayResult = result => (resultDom.innerHTML = result);
 const getValueFromDom = dom => dom.value;
 const toInt = value => parseInt(value, 10);
+const defaultValue = value => coalesce(constant(value), Identity);
 const safeValueFromDom = compose(
+  defaultValue(0),
   safeNumber,
   toInt,
   getValueFromDom
