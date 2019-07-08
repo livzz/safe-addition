@@ -35,24 +35,15 @@ const safeValueFromDom = compose(
 const calculate = () => {
   let num2 = safeValueFromDom(numberDom2);
   let num1 = safeValueFromDom(numberDom1);
-  return safeAdd(num1, num2).option(0);
+  return safeAdd(num1, num2)
+    .map(displayResult)
+    .option(0);
 };
 
-numberDom1.addEventListener(
-  "input",
-  compose(
-    displayResult,
-    calculate
-  )
-);
+const attachEventListener = dom => dom.addEventListener("input", calculate);
 
-numberDom2.addEventListener(
-  "input",
-  compose(
-    displayResult,
-    calculate
-  )
-);
+attachEventListener(numberDom1);
+attachEventListener(numberDom2);
 
 // const numberInput = safe(isNumber, 2);
 // const resultNumber = numberInput.map(inc);
