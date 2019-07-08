@@ -1,0 +1,17 @@
+body {
+  font-family: sans-serif;
+}
+
+#number {
+  width: 300px;
+  display: flex;
+  justify-content: space-between;
+}
+
+label {
+  margin: 5px;
+}
+
+input {
+  width: 100px;
+}
